@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ExternalDataChangeExample.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
+        Width="400" Height="300"
+        x:Class="ExternalDataChangeExample.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="ExternalDataChangeExample">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <DockPanel Margin="10">
+        <Button DockPanel.Dock="Bottom" Command="{Binding AddTimestamp}">
+            <TextBlock>Add Timestamp To Selected Record</TextBlock>
+        </Button>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Spacing="6" Margin="0 10">
+            <TextBlock>Currently selected Record:</TextBlock>
+            <TextBlock>[</TextBlock>
+            <TextBlock Text="{Binding SelectedIndex}"/>
+            <TextBlock>]</TextBlock>
+            <TextBlock Text="{Binding SelectedArrival}"/>
+        </StackPanel>
+        <DataGrid SelectionMode="Single"
+                  Items="{Binding Arrivals}"
+                  SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedArrival, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Timestamp" Width="*" Binding="{Binding Timestampy}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+
+</Window>
